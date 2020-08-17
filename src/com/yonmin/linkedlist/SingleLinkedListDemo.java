@@ -1,5 +1,8 @@
 package com.yonmin.linkedlist;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 /**
  * 定义一个单向链表，保存水浒传英雄的编号、姓名和绰号
  */
@@ -46,6 +49,26 @@ public class SingleLinkedListDemo {
         }
         head.setNext(reverseHead.getNext());
     }
+
+    public static int[] reversePrint(HeroNode head) {
+        if(head == null) {
+            return new int[0];
+        }
+        HeroNode temp = head;
+        int count = 0;
+        while(temp != null) {
+            count ++;
+            temp = temp.getNext();
+        }
+        int[] NodeArray = new int[count];
+        temp = head;
+        for(int i = count - 1; i >= 0; --i) {
+            NodeArray[i] = temp.getNum();
+            temp = temp.getNext();
+        }
+        return NodeArray;
+    }
+
 }
 
 // 定义SingleLinkedList管理英雄
