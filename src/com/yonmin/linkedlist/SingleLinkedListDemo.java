@@ -69,6 +69,55 @@ public class SingleLinkedListDemo {
         return NodeArray;
     }
 
+    /**
+     * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     * 递归法
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static HeroNode mergeTwoLists1(HeroNode l1, HeroNode l2) {
+        if(l1 == null) {
+            return l2;
+        }
+        if(l2 == null) {
+            return l1;
+        }
+        if(l1.getNum() < l2.getNum()) {
+            l1.setNext(mergeTwoLists1(l1.getNext(), l2));
+            return l1;
+        } else {
+            l2.setNext(mergeTwoLists1(l1, l2.getNext()));
+            return l2;
+        }
+    }
+
+    /**
+     * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     * 迭代法
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static HeroNode mergeTwoLists2(HeroNode l1, HeroNode l2) {
+        HeroNode prev = new HeroNode(-1,"","");
+        HeroNode preHead = prev;
+        while (l1 != null && l2 != null) {
+            if (l1.getNum() < l2.getNum()) {
+                prev.setNext(l1);
+                prev = l1;
+                l1 = l1.getNext();
+            } else {
+                prev.setNext(l2);
+                prev = l2;
+                l2 = l2.getNext();
+            }
+        }
+        // 到最后还未连接剩余的节点
+        prev.setNext(l1 == null ? l2 : l1);
+        return preHead.getNext();
+
+    }
 }
 
 // 定义SingleLinkedList管理英雄
