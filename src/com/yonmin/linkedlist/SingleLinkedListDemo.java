@@ -25,10 +25,27 @@ public class SingleLinkedListDemo {
         linkedList.update(newhero3);
         linkedList.delete(2);
 
+        SingleLinkedListDemo.reverse(linkedList.getHead());
+
         // 显示链表
         linkedList.list();
     }
 
+    public static void reverse(HeroNode head) {
+        HeroNode reverseHead = new HeroNode(0, "", "");
+        HeroNode cur = head.getNext();
+        HeroNode next;
+        while (cur != null) {
+            // 保存当前节点的下一个节点
+            next = cur.getNext();
+            // 将当前节点插入到头结点和头结点后的节点之间
+            cur.setNext(reverseHead.getNext());
+            reverseHead.setNext(cur);
+            // 将cur后移
+            cur = next;
+        }
+        head.setNext(reverseHead.getNext());
+    }
 }
 
 // 定义SingleLinkedList管理英雄
