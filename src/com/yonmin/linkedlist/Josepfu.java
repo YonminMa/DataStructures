@@ -9,6 +9,7 @@ public class Josepfu {
         CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
         circleSingleLinkedList.addNode(5);
         circleSingleLinkedList.showNode();
+        circleSingleLinkedList.countNode(1, 2, 5);
     }
 }
 
@@ -62,6 +63,41 @@ class CircleSingleLinkedList {
         }
     }
 
+    /**
+     * 根据用户的输入，输出节点的出圈顺序
+     * @param startNo 表示从第几个节点数
+     * @param countNum 表示每次数几下
+     * @param nums 表示最初有多少节点
+     */
+    public void countNode(int startNo, int countNum, int nums) {
+        if (first == null || startNo < 1 || startNo > nums) {
+            System.out.println("参数输入有误");
+            return;
+        }
+        // 将first节点移动到起始位置
+        for (int i = 0; i < startNo - 1; i++) {
+            first = first.next;
+        }
+        // 创建一个辅助指针，使其指向first节点的上一个节点
+        ListNode helper = first;
+        while (helper.next != first) {
+            helper = helper.next;
+        }
+        // 当helper和first指向同一个节点的时候，链表中只有一个节点，循环结束
+        while (helper != first) {
+            // 让helper和first同时移动 countNum - 1 次
+            for (int i = 0; i < countNum - 1; i++) {
+                helper = helper.next;
+                first = first.next;
+            }
+            // 这时first指向的节点就是要出圈的节点
+            System.out.printf("节点%d出圈\n", first.id);
+            // 删除first指向的节点
+            first = first.next;
+            helper.next = first;
+        }
+        System.out.printf("最后留在圈中的节点编号为%d\n", first.id);
+     }
 }
 
 // 创建节点类
