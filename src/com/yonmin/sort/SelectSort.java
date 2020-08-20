@@ -10,7 +10,7 @@ public class SelectSort {
     }
 
     /**
-     * 冒泡排序，时间复杂度为 O(n^2)
+     * 选择排序，时间复杂度为 O(n^2)
      * @param array 需要排序的数组
      */
     public static void selectSort(int[] array) {
