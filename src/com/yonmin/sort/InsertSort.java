@@ -14,8 +14,8 @@ public class InsertSort {
      * @param array 需要排序的数组
      */
     public static void insertSort(int[] array) {
-        int insertVal = 0; // 待插入的数
-        int insertIndex = 0; // 应该插入的位置
+        int insertVal; // 待插入的数
+        int insertIndex; // 应该插入的位置
         for (int i = 1; i < array.length; i++) {
             insertVal = array[i];
             insertIndex = i - 1;
