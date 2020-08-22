@@ -50,17 +50,15 @@ public class ShellSort {
         for (int gap = array.length; gap > 0; gap/=2) {
             // 对每一组进行插入排序
             for (int i = gap; i < array.length; i++) {
-                insertIndex = i;
-                insertVal = array[insertIndex];
-                if (array[insertIndex] < array[insertIndex - gap]) {
-                    while (insertIndex - gap >= 0 && insertVal < array[insertIndex - gap]) {
-                        // 移动
-                        array[insertIndex] = array[insertIndex - gap];
-                        insertIndex -= gap;
-                    }
-                    // 当退出循环后就找到了插入的位置
-                    array[insertIndex] = insertVal;
+                insertIndex = i - gap;
+                insertVal = array[insertIndex + gap];
+                while (insertIndex >= 0 && insertVal < array[insertIndex]) {
+                    // 移动
+                    array[insertIndex + gap] = array[insertIndex];
+                    insertIndex -= gap;
                 }
+                // 当退出循环后就找到了插入的位置
+                array[insertIndex + gap] = insertVal;
             }
             System.out.printf("第%d轮交换后的数组", ++count);
             System.out.println(Arrays.toString(array));
